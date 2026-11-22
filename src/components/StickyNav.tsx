@@ -1,22 +1,62 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+
 export default function StickyNav() {
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    e.preventDefault();
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const pathname = usePathname();
+  const editorialPaths = ["/", "/videos", "/projects", "/activities", "/certifications", "/tech"];
+  const isEditorialPage = editorialPaths.includes(pathname);
+  const items = [
+    ["/videos", "Videos"],
+    ["/projects", "Projects"],
+    ["/activities", "Activities"],
+    ["/certifications", "Certifications"],
+    ["/tech", "Tech Stack"],
+  ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-neutral-800/60 bg-[#050505]/80 backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-12 lg:px-24 flex justify-between text-sm text-neutral-400 h-12 items-center">
-        <a href="#videos" onClick={(e) => scrollToSection(e, "videos")} className="hover:text-white transition-colors">Videos</a>
-        <a href="#projects" onClick={(e) => scrollToSection(e, "projects")} className="hover:text-white transition-colors">Projects</a>
-        <a href="#activities" onClick={(e) => scrollToSection(e, "activities")} className="hover:text-white transition-colors">Activities</a>
-        <a href="#certifications" onClick={(e) => scrollToSection(e, "certifications")} className="hover:text-white transition-colors">Certifications</a>
-        <a href="#tech" onClick={(e) => scrollToSection(e, "tech")} className="hover:text-white transition-colors">I Use</a>
+    <nav
+      aria-label="Section navigation"
+      className={`fixed inset-x-0 top-0 z-50 border-b backdrop-blur-xl ${
+        isEditorialPage
+          ? "border-neutral-300/80 bg-[#f4f4f1]/95"
+          : "border-neutral-800/60 bg-[#050505]/90"
+      }`}
+    >
+      <div
+        className={`mx-auto flex min-h-14 max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-1 px-3 py-2 text-xs sm:h-14 sm:flex-nowrap sm:gap-5 sm:px-6 sm:py-0 sm:text-sm ${
+          isEditorialPage ? "text-neutral-600" : "text-neutral-400"
+        }`}
+      >
+        <Link
+          href="/"
+          className={`shrink-0 rounded px-2 py-2 font-display text-[11px] font-semibold tracking-[0.12em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-400 ${
+            isEditorialPage ? "text-neutral-900 hover:text-blue-800" : "text-neutral-200 hover:text-white"
+          }`}
+        >
+          YANG&apos;S SPACE
+        </Link>
+        <div className="flex w-full flex-wrap items-center gap-x-1 sm:ml-auto sm:w-auto sm:flex-nowrap sm:gap-2">
+          {items.map(([href, label]) => (
+            <Link
+              key={href}
+              href={href}
+              aria-current={pathname === href ? "page" : undefined}
+              className={`whitespace-nowrap rounded px-2 py-1.5 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-400 sm:px-3 sm:py-2 ${
+                pathname === href
+                  ? isEditorialPage
+                    ? "text-blue-800"
+                    : "text-blue-300"
+                  : isEditorialPage
+                    ? "hover:bg-neutral-900/[0.05] hover:text-neutral-950"
+                    : "hover:bg-white/[0.06] hover:text-white"
+              }`}
+            >
+              {label}
+            </Link>
+          ))}
+        </div>
       </div>
     </nav>
   );

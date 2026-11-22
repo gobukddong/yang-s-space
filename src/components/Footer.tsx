@@ -13,16 +13,16 @@ export default function Footer() {
   };
 
   return (
-    <footer className="mt-24 pt-8 border-t border-neutral-800 flex flex-col md:flex-row items-center justify-between text-neutral-400 pb-8">
+    <footer className="mt-24 flex flex-col items-center justify-between border-t border-neutral-300 pt-8 pb-8 text-neutral-600 md:flex-row">
       <div className="mb-4 md:mb-0 text-left">
-        <p className="text-sm">© {new Date().getFullYear()} Yang's Portfolio. All rights reserved.</p>
+        <p className="text-sm">© {new Date().getFullYear()} Yang&apos;s Portfolio. All rights reserved.</p>
         <div className="mt-6 space-y-1.5">
           <p className="text-[10px] font-mono font-black uppercase tracking-[0.3em] text-transparent bg-clip-text bg-[linear-gradient(to_right,#ff00ff,#00ffff,#ffff00,#00ff00)] drop-shadow-[0_0_8px_rgba(0,255,255,0.3)]">Special Thanks</p>
-          <p className="text-[12px] font-sans text-neutral-400 font-medium">
-            UI/UX Design & Responsive Web QA : <span className="text-white">jinjoo</span>
+          <p className="text-[12px] font-sans font-medium text-neutral-600">
+            UI/UX Design & Responsive Web QA : <span className="text-neutral-900">jinjoo</span>
           </p>
-          <p className="text-[12px] font-sans text-neutral-400 font-medium">
-            Video Design Review : <span className="text-white">jeongyun</span>
+          <p className="text-[12px] font-sans font-medium text-neutral-600">
+            Video Design Review : <span className="text-neutral-900">jeongyun</span>
           </p>
         </div>
       </div>
@@ -32,9 +32,9 @@ export default function Footer() {
           href="https://instagram.com/yun_61114" 
           target="_blank"
           rel="noopener noreferrer"
-          className="group flex items-center gap-2 hover:text-white transition-colors"
+          className="group flex items-center gap-2 transition-colors hover:text-neutral-950"
         >
-          <div className="p-2 bg-neutral-900 rounded-full w-9 h-9 flex items-center justify-center group-hover:bg-gradient-to-tr group-hover:from-yellow-500 group-hover:via-red-500 group-hover:to-purple-500 transition-all duration-300">
+          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-neutral-200 p-2 transition-all duration-300 group-hover:bg-gradient-to-tr group-hover:from-yellow-500 group-hover:via-red-500 group-hover:to-purple-500">
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
               width="18" height="18" 
@@ -53,10 +53,10 @@ export default function Footer() {
         
         <button 
           onClick={handleCopyEmail}
-          className="group flex items-center gap-2 hover:text-white transition-colors focus:outline-none"
+          className="group flex items-center gap-2 transition-colors hover:text-neutral-950 focus:outline-none"
           title="클릭하여 이메일 주소 복사"
         >
-          <div className="p-2 bg-neutral-900 rounded-full w-9 h-9 flex items-center justify-center group-hover:bg-blue-500 transition-all duration-300">
+          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-neutral-200 p-2 transition-all duration-300 group-hover:bg-blue-600">
             <Mail size={18} className={`transition-colors ${copied ? "text-white" : "group-hover:text-white"}`} />
           </div>
           <span className={`text-sm font-medium transition-colors ${copied ? "text-blue-400" : ""}`}>

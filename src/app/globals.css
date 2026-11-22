@@ -3,13 +3,28 @@
 @theme {
   --color-background: #050505;
   --color-foreground: #ffffff;
-  --font-orbitron: var(--font-orbitron);
-  --font-outfit: var(--font-outfit);
-  --font-sans: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  --font-display: var(--font-cormorant-garamond), var(--font-noto-serif-kr), serif;
+  --font-orbitron: var(--font-display);
+  --font-outfit: var(--font-display);
+  --font-sans: var(--font-display);
+  --font-serif: var(--font-display);
 }
 
-html {
+html,
+body {
+  overflow-x: clip;
   scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
 }
 
 /* GPU acceleration helper */
@@ -38,6 +53,6 @@ html {
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-outfit uppercase tracking-[0.2em] font-medium;
+    @apply font-sans uppercase tracking-[0.2em] font-medium;
   }
 }

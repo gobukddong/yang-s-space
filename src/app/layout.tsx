@@ -1,16 +1,26 @@
 import type { Metadata } from "next";
-import { Orbitron, Outfit } from "next/font/google";
+import { Cormorant_Garamond, Noto_Serif_KR } from "next/font/google";
 import "./globals.css";
 import StickyNav from "@/components/StickyNav";
 import ScrollProgressButton from "@/components/ScrollProgressButton";
 import SpaceEffect from "@/components/SpaceEffect";
 
-const orbitron = Orbitron({ subsets: ["latin"], variable: "--font-orbitron" });
-const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
+const notoSerifKr = Noto_Serif_KR({
+  subsets: ["latin"],
+  weight: "variable",
+  variable: "--font-noto-serif-kr",
+  display: "swap",
+});
+const cormorantGaramond = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: "variable",
+  variable: "--font-cormorant-garamond",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Yang's Space",
-  description: "hello world",
+  description: "숭실대학교 AI소프트웨어학과 양상윤의 프로젝트와 활동 포트폴리오입니다.",
 };
 
 export default function RootLayout({
@@ -19,11 +29,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark" data-scroll-behavior="smooth">
-      <head>
-        <link rel="stylesheet" as="style" crossOrigin="" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
-      </head>
-      <body className={`${orbitron.variable} ${outfit.variable} font-sans antialiased bg-black text-white relative min-h-screen`}>
+    <html lang="ko" className="dark" data-scroll-behavior="smooth">
+      <body className={`${notoSerifKr.variable} ${cormorantGaramond.variable} font-sans antialiased bg-black text-white relative min-h-screen`}>
         <SpaceEffect />
         <div className="relative z-10">
           <StickyNav />

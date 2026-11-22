@@ -1,78 +1,72 @@
-"use client";
-
-import CosmicSystem from "@/components/CosmicSystem";
-import ActivityGrid from "@/components/ActivityGrid";
-import Certifications from "@/components/Certifications";
-import TechStack from "@/components/TechStack";
+import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 import Footer from "@/components/Footer";
-import VideoGrid from "@/components/VideoGrid";
-import LibraConstellation from "@/components/LibraConstellation";
-import GeminiConstellation from "@/components/GeminiConstellation";
+import RevealOnScroll from "@/components/RevealOnScroll";
+
+const collections = [
+  {
+    href: "/videos",
+    number: "01",
+    title: "Videos",
+  },
+  {
+    href: "/projects",
+    number: "02",
+    title: "Projects",
+  },
+  {
+    href: "/activities",
+    number: "03",
+    title: "Activities",
+  },
+  {
+    href: "/certifications",
+    number: "04",
+    title: "Certifications",
+  },
+  {
+    href: "/tech",
+    number: "05",
+    title: "Tech Stack",
+  },
+];
 
 export default function Home() {
   return (
-    <main className="min-h-screen text-white pt-32 pb-64 p-4 sm:p-8 md:p-12 lg:p-24 selection:bg-blue-500/30 overflow-x-hidden">
-      <div className="max-w-7xl mx-auto space-y-[12vh] relative text-center">
-        <header className="flex flex-col items-center gap-6 pt-10 relative text-center">
-          <h1 className="text-5xl md:text-6xl font-semibold tracking-tight font-outfit">
-            Yang's{" "}
-            <span className="text-transparent bg-clip-text bg-[linear-gradient(to_right,#7baaf7,#ea4335,#fbbc05,#34a853)] tracking-tighter pr-2">
-              Space
-            </span>
+    <main className="min-h-screen bg-[#f4f4f1] px-5 pt-14 pb-16 text-[#30302e] sm:px-8">
+      <div className="mx-auto max-w-6xl">
+        <header className="flex min-h-[calc(100svh-3.5rem)] items-center justify-center text-center">
+          <h1 className="max-w-6xl font-sans text-5xl font-medium normal-case leading-[1.08] tracking-tight sm:text-7xl md:text-8xl">
+            <span className="text-black">My Space,</span>
+            <br />
+            <span className="text-neutral-500">Playground</span>
           </h1>
-          <p className="text-neutral-300 text-sm line-clamp-2" style={{ fontFamily: "'Orbitron', sans-serif" }}>
-            Soongsil Univ. School of AI Software
-          </p>
-         
-          <div className="flex-shrink-0 flex items-center justify-center gap-4">
-            <LibraConstellation />
-            <GeminiConstellation />
-          </div>
         </header>
 
-        <section id="videos" className="space-y-10 scroll-mt-32 relative py-16">
-          <div className="border-b border-neutral-800 pb-2 flex justify-center">
-            <h2 className="text-3xl md:text-5xl uppercase text-transparent bg-clip-text bg-[linear-gradient(to_bottom,#e8e8e8_0%,#ffffff_20%,#888888_40%,#cccccc_55%,#aaaaaa_70%,#ffffff_85%,#999999_100%)] text-center font-bold tracking-widest">
-              Videos
-            </h2>
-          </div>
-          <VideoGrid />
-        </section>
-
-        <section id="projects" className="space-y-10 scroll-mt-32 relative content-auto py-16">
-          <div className="border-b border-neutral-800 pb-2 flex justify-center">
-            <h2 className="text-3xl md:text-5xl uppercase text-transparent bg-clip-text bg-[linear-gradient(to_bottom,#e8e8e8_0%,#ffffff_20%,#888888_40%,#cccccc_55%,#aaaaaa_70%,#ffffff_85%,#999999_100%)] text-center font-bold tracking-widest">
-              Projects
-            </h2>
-          </div>
-          <CosmicSystem />
-        </section>
-        
-        <section id="activities" className="space-y-8 scroll-mt-12 relative">
-          <div className="border-b border-neutral-800 pb-2 flex justify-center">
-            <h2 className="text-3xl md:text-5xl uppercase text-transparent bg-clip-text bg-[linear-gradient(to_bottom,#e8e8e8_0%,#ffffff_20%,#888888_40%,#cccccc_55%,#aaaaaa_70%,#ffffff_85%,#999999_100%)] text-center font-bold tracking-widest">
-              Activities
-            </h2>
-          </div>
-          <ActivityGrid />
-        </section>
-
-        <section id="certifications" className="space-y-8 scroll-mt-12 relative">
-          <div className="border-b border-neutral-800 pb-2 flex justify-center">
-            <h2 className="text-3xl md:text-5xl uppercase text-transparent bg-clip-text bg-[linear-gradient(to_bottom,#e8e8e8_0%,#ffffff_20%,#888888_40%,#cccccc_55%,#aaaaaa_70%,#ffffff_85%,#999999_100%)] text-center font-bold tracking-widest">
-              Certifications
-            </h2>
-          </div>
-          <Certifications />
-        </section>
-
-        <section id="tech" className="space-y-8 scroll-mt-12 relative">
-          <div className="border-b border-neutral-800 pb-2 flex justify-center">
-            <h2 className="text-3xl md:text-5xl uppercase text-transparent bg-clip-text bg-[linear-gradient(to_bottom,#e8e8e8_0%,#ffffff_20%,#888888_40%,#cccccc_55%,#aaaaaa_70%,#ffffff_85%,#999999_100%)] text-center font-bold tracking-widest">
-              I Use these
-            </h2>
-          </div>
-          <TechStack />
+        <section className="pt-10">
+          <RevealOnScroll>
+            <nav aria-label="Portfolio sections">
+              {collections.map((collection) => (
+                <Link
+                  key={collection.href}
+                  href={collection.href}
+                  className="group grid grid-cols-[2.5rem_1fr_auto] items-center gap-3 border-b border-neutral-300 py-5 transition-colors hover:text-blue-800 sm:grid-cols-[4rem_1fr_auto] sm:gap-5 sm:py-6"
+                >
+                  <span className="font-outfit text-xs text-neutral-500">{collection.number}</span>
+                  <span>
+                    <span className="text-xl font-medium normal-case tracking-normal text-neutral-900 sm:text-2xl">
+                      {collection.title}
+                    </span>
+                  </span>
+                  <ArrowUpRight
+                    size={18}
+                    aria-hidden="true"
+                    className="text-neutral-500 transition-colors group-hover:text-blue-700"
+                  />
+                </Link>
+              ))}
+            </nav>
+          </RevealOnScroll>
         </section>
 
         <Footer />

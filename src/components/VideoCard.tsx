@@ -15,10 +15,19 @@ interface VideoCardProps {
 
 export default function VideoCard({ project, onClick, priority = false, isBlackHoleActive = false, index }: VideoCardProps) {
   return (
-    <div className="relative w-full max-w-4xl mx-auto aspect-video overflow-visible">
+    <motion.div
+      className="relative w-full overflow-visible"
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.18 }}
+      transition={{ duration: 0.65, delay: (index % 3) * 0.12, ease: "easeOut" }}
+    >
       {/* Original Card: Hides during event */}
-      <motion.div
-        className={`group relative cursor-pointer overflow-hidden rounded-xl bg-neutral-900 w-full h-full shadow-lg transition-opacity duration-500 ${isBlackHoleActive ? 'opacity-0' : 'opacity-100'}`}
+      <motion.button
+        type="button"
+        disabled={isBlackHoleActive}
+        aria-label={`Play video: ${project.title}`}
+        className={`group relative block aspect-square w-full cursor-pointer overflow-hidden bg-neutral-200 text-left transition-opacity duration-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-700 ${isBlackHoleActive ? "opacity-0" : "opacity-100"}`}
         whileHover={!isBlackHoleActive ? "hover" : ""}
         onClick={() => !isBlackHoleActive && onClick(project)}
       >
@@ -34,11 +43,11 @@ export default function VideoCard({ project, onClick, priority = false, isBlackH
             alt={project.title}
             fill
             priority={priority}
-            className="object-cover opacity-90 transition-opacity duration-300 group-hover:opacity-50"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover opacity-95 transition-opacity duration-300 group-hover:opacity-70"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         </motion.div>
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
           <motion.div
             variants={{
               hover: { opacity: 1, scale: 1 },
@@ -46,17 +55,20 @@ export default function VideoCard({ project, onClick, priority = false, isBlackH
             }}
             initial="initial"
             transition={{ duration: 0.2 }}
-            className="bg-red-600/90 text-white rounded-full p-4 backdrop-blur-sm shadow-xl"
+            className="rounded-full bg-blue-700 p-3 text-white shadow-xl"
           >
-            <Play fill="currentColor" size={32} />
+            <Play fill="currentColor" size={24} />
           </motion.div>
         </div>
-        <div className="absolute bottom-0 inset-x-0 p-5 bg-gradient-to-t from-black/95 via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex flex-col justify-end text-left">
-          <h3 className="text-white font-bold text-lg leading-tight mb-1">{project.title}</h3>
-          <span className="text-red-400 text-xs font-bold uppercase tracking-wider mb-2">{project.category}</span>
-          <p className="text-neutral-300 text-sm line-clamp-2">{project.description}</p>
-        </div>
-      </motion.div>
+      </motion.button>
+      <div className="pt-3">
+        <h3 className="text-base font-medium normal-case leading-snug tracking-normal text-neutral-900">
+          {project.title}
+        </h3>
+        <p className="mt-1 text-xs text-neutral-600">
+          {project.category} <span aria-hidden="true">·</span> {project.description}
+        </p>
+      </div>
 
       {/* Sucking Copy */}
       <AnimatePresence>
@@ -66,12 +78,12 @@ export default function VideoCard({ project, onClick, priority = false, isBlackH
             animate={{ 
                 scale: 0, 
                 opacity: 0, 
-                x: (Math.random() - 0.5) * 300, 
+                x: ((index % 5) - 2) * 60,
                 y: 1500 + (index * 100), // Target depth
                 rotate: 1080 
             }}
             transition={{ duration: 3.5, ease: "anticipate", delay: index * 0.1 }}
-            className="absolute inset-0 z-50 pointer-events-none rounded-xl overflow-hidden shadow-2xl"
+            className="pointer-events-none absolute inset-x-0 top-0 z-50 aspect-square overflow-hidden shadow-2xl"
           >
              <Image
                 src={project.thumbnail}
@@ -82,6 +94,6 @@ export default function VideoCard({ project, onClick, priority = false, isBlackH
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }

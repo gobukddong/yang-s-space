@@ -1,6 +1,6 @@
 "use client";
 
-import { FileText } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { DocumentProject } from "@/data/documents";
 import Link from "next/link";
@@ -13,16 +13,29 @@ export default function DocumentCard({ document }: DocumentCardProps) {
   return (
     <Link 
       href={document.externalUrl || `/projects/${document.id}`} 
-      className="block h-full outline-none"
+      className="block h-full outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-700"
       {...(document.externalUrl ? { target: "_blank", rel: "noopener noreferrer" } : {})}
     >
       <motion.div
-        className="group relative cursor-pointer overflow-hidden rounded-xl bg-neutral-900 border border-neutral-800 p-5 flex flex-col h-full min-h-[9.5rem] shadow-lg hover:border-neutral-700 transition-colors"
-        whileHover={{ y: -5 }}
+        className="group flex h-full min-h-32 flex-col border-t border-neutral-300 pt-4 transition-colors"
+        whileHover={{ y: -2 }}
       >
-        <h3 className="text-white font-bold text-xl mb-2">{document.title}</h3>
-        <span className="text-blue-400 text-xs font-bold uppercase tracking-wider mb-3">{document.category}</span>
-        <p className="text-neutral-400 text-sm line-clamp-3 mt-auto">{document.summary}</p>
+        <span className="mb-3 flex items-center justify-between gap-3">
+          <span className="text-xs text-neutral-500">{document.category}</span>
+          <span className="text-[10px] font-medium uppercase tracking-[0.12em] text-blue-700">
+            {document.summary}
+          </span>
+        </span>
+        <span className="flex items-start justify-between gap-3">
+          <span className="text-lg font-medium normal-case leading-snug tracking-normal text-neutral-900 group-hover:text-blue-800">
+            {document.title}
+          </span>
+          <ArrowUpRight
+            size={16}
+            aria-hidden="true"
+            className="mt-1 shrink-0 text-neutral-500 transition-colors group-hover:text-blue-700"
+          />
+        </span>
       </motion.div>
     </Link>
   );

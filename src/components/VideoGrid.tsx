@@ -22,7 +22,7 @@ export default function VideoGrid({ isBlackHoleActive = false }: { isBlackHoleAc
 
   return (
     <>
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((project, index) => (
           <VideoCard 
             key={project.id} 
